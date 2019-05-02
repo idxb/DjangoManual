@@ -2,7 +2,7 @@
 
 ## Модели
 
-___
+---
 1. Описываем в нашем приложении модель в файле `myapp/models.py`
 
 ```python
@@ -27,3 +27,28 @@ class Post(models.Model):
         return self.title
 ```
 [Помощь по полям модели](https://docs.djangoproject.com/en/2.2/ref/models/fields/)
+
+2. Делаем миграцию полей в базу с помощью командной строки
+
+3. Добавляем поля в админку
+
+---
+
+## Url
+
+Добавим файл `myapp.urls.py` в общий шаблон `mysite/urls.py`
+
+```python
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('myapp.urls')),
+]
+```
+1. Все адреса описываются в файле папки приложения `myapp/urls.py`
+
+
+
+
