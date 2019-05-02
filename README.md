@@ -36,7 +36,7 @@ class Post(models.Model):
 
 ## Url
 
-Добавим файл `myapp.urls.py` в общий шаблон `mysite/urls.py`
+Добавим файл `myapp.urls.py` в глобальный шаблон `mysite/urls.py`
 
 ```python
 from django.contrib import admin
@@ -44,11 +44,26 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Запрос к 127.0.0.1 отправит нас к myapp.urls
     path('', include('myapp.urls')),
 ]
 ```
 1. Все адреса описываются в файле папки приложения `myapp/urls.py`
 
+```python
+# Импортируем функцию path и все views из приложения
+from django.urls import path
+from . import views
 
+# Добавляем шаблон ссылки на соответствующий view
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+]
+```
+[Помощь по описанию ссылок](https://docs.djangoproject.com/en/2.0/topics/http/urls/)
 
+---
 
+## Представления
+
+Все представления находятся в `myapp/views.py` и они выводятся, когда к ним обращаются через `urls.py`
