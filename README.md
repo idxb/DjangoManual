@@ -75,12 +75,35 @@ urlpatterns = [
 `myapp/views.py`
 
 ```python
+# Простое представление
+
+from django.shortcuts import render
+
 def post_list(request):
 #   Возвращаем функцию render, которая принимает request в качестве аргумента
-#   и дальше все собирается на  шаблоне post_list.html
+#   и дальше все собирается на шаблоне post_list.html
     return render(request, 'blog/post_list.html', {})
-```    
-    [Помощь по предствалениям](https://docs.djangoproject.com/en/2.2/topics/http/views/)
+```
+Что бы интерактивно выводить данные в представления, нам нужно воспользоваться API QuerySet в файле представлений и сформировать правильный запрос.
+
+[Огромная помощь по QuerySet API](https://docs.djangoproject.com/en/2.2/ref/models/querysets/)
+
+`myapp/views.py`
+
+```python
+# Представление с выводом результата QuerySet API
+
+from django.shortcuts import render
+from django.utils import timezone
+from .models import Post
+
+def post_list(request):
+    # Создаем переменную post, как имя для нашего QuerySet
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    # Возвращаем все как обычно, но в {} указываем имена передаваемых параметров в шаблон
+    return render(request, 'blog/post_list.html', {'posts': posts})
+```
+[Помощь по представлениям](https://docs.djangoproject.com/en/2.2/topics/http/views/)
     
 ---
 
@@ -88,6 +111,3 @@ def post_list(request):
 
 Шаблоны создаются в папке `myapp/templates/myapp`
 
-Что бы интерактивно выводить данные в представления, нам нужно воспользоваться API QuerySet в файле представлений и сформировать правильный запрос.
-
-[Огромная помощь по QuerySet API](https://docs.djangoproject.com/en/2.2/ref/models/querysets/)
