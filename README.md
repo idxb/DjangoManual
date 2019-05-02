@@ -1,12 +1,11 @@
 # DjangoManual
-Описание основных моментов Django
 
 ## Общая концепция работы Django
 
 1. Описываем в нашем приложении модель в файле `myapp/models.py`
 
-  Пример модели и ее методов для записи в блоге:
 ```python
+# Пример модели и ее методов для записи в блоге
 # Определяем нашу модель с именем Post(и является наследованием от модели Django(models.Model))
 class Post(models.Model):
     
@@ -26,3 +25,4 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 ```
+[Помощь по полям модели](https://docs.djangoproject.com/en/2.2/ref/models/fields/)
