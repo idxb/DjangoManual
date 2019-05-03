@@ -111,3 +111,18 @@ def post_list(request):
 
 Шаблоны создаются в папке `myapp/templates/myapp`
 
+`myapp/templates/myapp/post_list.html`
+
+```html
+<div>
+    <h1><a href="/">Django Girls Blog</a></h1>
+</div>
+
+{% for post in posts %}
+    <div>
+        <p>published: {{ post.published_date }}</p>
+        <h1><a href="">{{ post.title }}</a></h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+{% endfor %}
+```
